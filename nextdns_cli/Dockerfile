@@ -1,12 +1,11 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:3.16
 FROM $BUILD_FROM
 
-# Install NextDNS CLI
+# Install curl + NextDNS
 RUN apk add --no-cache curl && \
-    sh -c "$(curl -sL https://nextdns.io/install)" && \
+    curl -sL https://nextdns.io/install | sh -s -- -i && \
     apk del curl
 
-# Expose DNS ports
-EXPOSE 53/tcp 53/udp
-
-CMD ["/usr/local/bin/nextdns", "run", "-config", "/config/nextdns.conf"]
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
+CMD ["/run.sh"]
