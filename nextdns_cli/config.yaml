@@ -1,0 +1,15 @@
+name: NextDNS CLI
+description: NextDNS CLI
+version: "1.0"
+slug: nextdns_cli
+arch:
+  - aarch64
+  - amd64
+  - armv7
+map:
+  - config:rw
+mode: host_network
+options:
+  profile_id: "da8163"
+schema:
+  profile_id: str
